@@ -1,0 +1,214 @@
+{
+  "info": {
+    "name": "Library Management System API - Week 2",
+    "description": "Postman collection for Week 2 NestJS assignment: authentication, books, and genres CRUD.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "bookId",
+      "value": "1"
+    },
+    {
+      "key": "genreId",
+      "value": "17"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Librarian\",\n  \"email\": \"librarian@example.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"librarian@example.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Get All Books",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/books"
+          }
+        },
+        {
+          "name": "Filter Books by Genre",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/books?genreId={{genreId}}"
+          }
+        },
+        {
+          "name": "Search Books",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/books?search=code&page=1&limit=5"
+          }
+        },
+        {
+          "name": "Get One Book",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/books/{{bookId}}"
+          }
+        },
+        {
+          "name": "Create Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"The Example Book\",\n  \"author\": \"Example Author\",\n  \"isbn\": \"9780132350884\",\n  \"totalCopies\": 5,\n  \"genreId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/books"
+          }
+        },
+        {
+          "name": "Update Book",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Example Book\",\n  \"totalCopies\": 8\n}"
+            },
+            "url": "{{baseUrl}}/books/{{bookId}}"
+          }
+        },
+        {
+          "name": "Delete Book",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/books/{{bookId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Genres",
+      "item": [
+        {
+          "name": "Create Genre",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Science Fiction\"\n}"
+            },
+            "url": "{{baseUrl}}/genres"
+          }
+        },
+        {
+          "name": "Get All Genres",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/genres"
+          }
+        },
+        {
+          "name": "Get One Genre",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/genres/{{genreId}}"
+          }
+        },
+        {
+          "name": "Update Genre",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Science Fiction\"\n}"
+            },
+            "url": "{{baseUrl}}/genres/{{genreId}}"
+          }
+        },
+        {
+          "name": "Delete Genre",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/genres/{{genreId}}"
+          }
+        }
+      ]
+    }
+  ]
+}
